@@ -36,7 +36,12 @@
 
 ## 📸 Screenshots
 
-<!-- Add screenshots here -->
+<div align="center">
+  <img src="screenshots/app_screenshot.jpg" alt="Todo List App Dark Mode" width="300">
+  <img src="screenshots/app_screenshot_light.jpg" alt="Todo List App Light Mode" width="300">
+  <p><i>Dark mode and Light mode with task list showing different priority levels</i></p>
+
+</div>
 
 ## 🚀 Getting Started
 
