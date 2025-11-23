@@ -58,7 +58,7 @@
 
    ```bash
    git clone <repo_url>
-   cd to_do_list
+   cd To-Do-Flutter-App
    ```
 
 2. **Install dependencies**
@@ -137,9 +137,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 👨‍💻 Author
 
-**Your Name**
+**Mohamed Ramadan**
 
-- GitHub: [@yourusername](https://github.com/mohamed-ramadan-me)
+- GitHub: [@mohamed-ramadan-me](https://github.com/mohamed-ramadan-me)
 - Email: <m.ramadan.tech@gmail.com>
 
 ---
