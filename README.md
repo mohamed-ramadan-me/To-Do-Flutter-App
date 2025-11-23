@@ -12,19 +12,19 @@
 
 ---
 
-## ✨ Features
+## Features
 
-- ✅ **CRUD Operations**: Create, read, update, and delete tasks
-- 🎨 **Material Design 3**: Modern UI with dynamic theming
-- 🌓 **Dark/Light Mode**: Seamless theme switching with persistent preferences
-- 📅 **Due Dates**: Set and manage task deadlines
-- 🏷️ **Priority Levels**: Organize tasks by High, Medium, or Low priority
-- 🔍 **Search Functionality**: Quickly find tasks with real-time search
-- 💾 **Local Storage**: Persistent data using SharedPreferences
-- 📱 **Responsive Design**: Optimized for various screen sizes
-- ⚡ **Smooth Animations**: Polished transitions and interactions
+- **CRUD Operations**: Create, read, update, and delete tasks
+- **Material Design 3**: Modern UI with dynamic theming
+- **Dark/Light Mode**: Seamless theme switching with persistent preferences
+- **Due Dates**: Set and manage task deadlines
+- **Priority Levels**: Organize tasks by High, Medium, or Low priority
+- **Search Functionality**: Quickly find tasks with real-time search
+- **Local Storage**: Persistent data using SharedPreferences
+- **Responsive Design**: Optimized for various screen sizes
+- **Smooth Animations**: Polished transitions and interactions
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: Flutter 3.9.2
 - **Language**: Dart 3.9.2
@@ -34,7 +34,7 @@
 - **Typography**: Google Fonts
 - **Date Handling**: intl package
 
-## 📸 Screenshots
+## Screenshots
 
 <div align="center">
   <img src="screenshots/app_screenshot.jpg" alt="Todo List App Dark Mode" width="300">
@@ -43,7 +43,7 @@
 
 </div>
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -87,25 +87,25 @@ The APK will be located at:
 build/app/outputs/flutter-apk/app-release.apk
 ```
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 lib/
 ├── main.dart                 # Application entry point
 ├── models/
-│   ├── todo.dart            # Todo data model
-│   └── priority.dart        # Priority enum and extensions
+│   ├── todo.dart             # Todo data model
+│   └── priority.dart         # Priority enum and extensions
 ├── screens/
 │   └── todo_list_screen.dart # Main todo list screen
 ├── services/
-│   ├── todo_storage.dart    # Local storage service
-│   └── theme_service.dart   # Theme management service
+│   ├── todo_storage.dart     # Local storage service
+│   └── theme_service.dart    # Theme management service
 └── widgets/
     ├── todo_item_widget.dart # Individual todo item
     └── add_todo_dialog.dart  # Add/Edit todo dialog
 ```
 
-## 🎯 Usage
+## Usage
 
 1. **Create a Task**: Tap the floating action button (+) to add a new task
 2. **Set Priority**: Choose from High, Medium, or Low priority levels
@@ -116,7 +116,7 @@ lib/
 7. **Search**: Use the search bar to filter tasks
 8. **Toggle Theme**: Tap the theme icon to switch between light and dark mode
 
-## 📦 Dependencies
+## Dependencies
 
 | Package | Version | Purpose |
 |---------|---------|---------|
@@ -127,15 +127,15 @@ lib/
 | `uuid` | ^4.3.3 | Unique ID generation |
 | `cupertino_icons` | ^1.0.8 | iOS-style icons |
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 👨‍💻 Author
+## Author
 
 **Mohamed Ramadan**
 
