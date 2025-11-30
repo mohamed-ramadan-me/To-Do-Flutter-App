@@ -3,10 +3,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'screens/todo_list_screen.dart';
 import 'services/theme_service.dart';
+import 'services/tutorial_service.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(create: (_) => ThemeService(), child: const MyApp()),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeService()),
+        ChangeNotifierProvider(create: (_) => TutorialService()),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
 

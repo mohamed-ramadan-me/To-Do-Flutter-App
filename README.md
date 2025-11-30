@@ -1,7 +1,7 @@
-# Todo List App
+# To-Do List App
 
 <div align="center">
-  <img src="assets/icon.png" alt="Todo List App Icon" width="150" height="150">
+  <img src="assets/icon.png" alt="To-Do List App Icon" width="150" height="150">
   
   **A modern, feature-rich To-Do List application built with Flutter**
   
@@ -20,6 +20,8 @@
 - **Due Dates**: Set and manage task deadlines
 - **Priority Levels**: Organize tasks by High, Medium, or Low priority
 - **Search Functionality**: Quickly find tasks with real-time search
+- **Interactive Tutorial**: Animated "Swipe to Delete" tutorial for new users
+- **Settings Screen**: Manage theme, tutorial preferences, and view developer info
 - **Local Storage**: Persistent data using SharedPreferences
 - **Responsive Design**: Optimized for various screen sizes
 - **Smooth Animations**: Polished transitions and interactions
@@ -37,8 +39,8 @@
 ## Screenshots
 
 <div align="center">
-  <img src="screenshots/app_screenshot.jpg" alt="Todo List App Dark Mode" width="300">
-  <img src="screenshots/app_screenshot_light.jpg" alt="Todo List App Light Mode" width="300">
+  <img src="screenshots/app_screenshot_dark.jpg" alt="To-Do List App Dark Mode" width="300">
+  <img src="screenshots/app_screenshot_light.jpg" alt="To-Do List App Light Mode" width="300">
   <p><i>Dark mode and Light mode with task list showing different priority levels</i></p>
 
 </div>
@@ -96,13 +98,16 @@ lib/
 │   ├── todo.dart             # Todo data model
 │   └── priority.dart         # Priority enum and extensions
 ├── screens/
-│   └── todo_list_screen.dart # Main todo list screen
+│   ├── todo_list_screen.dart # Main todo list screen
+│   └── settings_screen.dart  # Settings and About screen
 ├── services/
 │   ├── todo_storage.dart     # Local storage service
-│   └── theme_service.dart    # Theme management service
+│   ├── theme_service.dart    # Theme management service
+│   └── tutorial_service.dart # Tutorial state management
 └── widgets/
-    ├── todo_item_widget.dart # Individual todo item
-    └── add_todo_dialog.dart  # Add/Edit todo dialog
+    ├── todo_item_widget.dart       # Individual todo item
+    ├── add_todo_dialog.dart        # Add/Edit todo dialog
+    └── delete_task_tutorial.dart   # Tutorial overlay widget
 ```
 
 ## Usage
@@ -114,7 +119,7 @@ lib/
 5. **Edit Task**: Tap on a task card to edit its details
 6. **Delete Task**: Swipe left or use the delete icon
 7. **Search**: Use the search bar to filter tasks
-8. **Toggle Theme**: Tap the theme icon to switch between light and dark mode
+8. **Settings**: Access Settings to toggle theme, reset tutorial, or view developer info
 
 ## Dependencies
 
@@ -126,6 +131,8 @@ lib/
 | `intl` | ^0.19.0 | Date formatting |
 | `uuid` | ^4.3.3 | Unique ID generation |
 | `cupertino_icons` | ^1.0.8 | iOS-style icons |
+| `url_launcher` | ^6.2.4 | Open external links |
+| `font_awesome_flutter` | ^10.7.0 | Social media icons |
 
 ## Contributing
 
@@ -135,12 +142,17 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Author
+## Authors
 
 **Mohamed Ramadan**
 
+- LinkedIn: [Mohamed Ramadan](https://www.linkedin.com/in/mohamed-ramadan-me/)
 - GitHub: [@mohamed-ramadan-me](https://github.com/mohamed-ramadan-me)
-- Email: <m.ramadan.tech@gmail.com>
+
+**Mostafa Rashidy**
+
+- LinkedIn: [Mostafa Rashidy](https://www.linkedin.com/in/mostafa-rashidy/)
+- GitHub: [@MostafaRashidy](https://github.com/MostafaRashidy)
 
 ---
 

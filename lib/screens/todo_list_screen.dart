@@ -5,6 +5,9 @@ import '../services/todo_storage.dart';
 import '../services/theme_service.dart';
 import '../widgets/todo_item_widget.dart';
 import '../widgets/add_todo_dialog.dart';
+import '../widgets/delete_task_tutorial.dart';
+import '../services/tutorial_service.dart';
+import 'settings_screen.dart';
 
 enum SortOption {
   createdDate,
@@ -214,15 +217,13 @@ class _TodoListScreenState extends State<TodoListScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(
-              Provider.of<ThemeService>(context).isDarkMode
-                  ? Icons.light_mode
-                  : Icons.dark_mode,
-            ),
+            icon: const Icon(Icons.settings),
             onPressed: () {
-              Provider.of<ThemeService>(context, listen: false).toggleTheme();
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
+              );
             },
-            tooltip: 'Toggle theme',
+            tooltip: 'Settings',
           ),
           IconButton(
             icon: const Icon(Icons.sort),
@@ -231,107 +232,140 @@ class _TodoListScreenState extends State<TodoListScreen> {
           ),
         ],
       ),
-      body: Column(
+      body: Stack(
         children: [
-          // Search bar
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              onChanged: _onSearchChanged,
-              style: Theme.of(context).brightness == Brightness.dark
-                  ? const TextStyle(color: Color(0xFFFFFFFF))
-                  : null,
-              decoration: InputDecoration(
-                hintText: 'Search todos...',
-                hintStyle: Theme.of(context).brightness == Brightness.dark
-                    ? TextStyle(color: const Color(0xFFFFFFFF).withOpacity(0.5))
-                    : null,
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color(0xFFFFFFFF)
+          Column(
+            children: [
+              // Search bar
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: TextField(
+                  onChanged: _onSearchChanged,
+                  style: Theme.of(context).brightness == Brightness.dark
+                      ? const TextStyle(color: Color(0xFFFFFFFF))
                       : null,
-                ),
-                suffixIcon: _searchQuery.isNotEmpty
-                    ? IconButton(
-                        icon: Icon(
-                          Icons.clear,
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? const Color(0xFFFFFFFF)
-                              : null,
-                        ),
-                        onPressed: () => _onSearchChanged(''),
-                      )
-                    : null,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: Theme.of(context).brightness == Brightness.dark
-                      ? const BorderSide(color: Color(0xFF5457CC), width: 1.5)
-                      : BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: Theme.of(context).brightness == Brightness.dark
-                      ? const BorderSide(color: Color(0xFF5457CC), width: 1.5)
-                      : BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: Theme.of(context).brightness == Brightness.dark
-                      ? const BorderSide(color: Color(0xFF5457CC), width: 2.0)
-                      : BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Theme.of(context).brightness == Brightness.dark
-                    ? const Color(0xFF1C1C2E)
-                    : Colors.grey[100],
-              ),
-            ),
-          ),
-
-          // Todo list
-          Expanded(
-            child: _isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : _filteredTodos.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          _searchQuery.isEmpty
-                              ? Icons.check_circle_outline
-                              : Icons.search_off,
-                          size: 80,
-                          color: Colors.grey[400],
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          _searchQuery.isEmpty
-                              ? 'No todos yet!\nTap + to add one'
-                              : 'No todos found',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
+                  decoration: InputDecoration(
+                    hintText: 'Search todos...',
+                    hintStyle: Theme.of(context).brightness == Brightness.dark
+                        ? TextStyle(
+                            color: const Color(0xFFFFFFFF).withOpacity(0.5),
+                          )
+                        : null,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color(0xFFFFFFFF)
+                          : null,
                     ),
-                  )
-                : ListView.builder(
-                    itemCount: _filteredTodos.length,
-                    padding: const EdgeInsets.only(bottom: 80),
-                    itemBuilder: (context, index) {
-                      final todo = _filteredTodos[index];
-                      return TodoItemWidget(
-                        todo: todo,
-                        onToggle: () => _toggleTodo(todo),
-                        onEdit: () => _editTodo(todo),
-                        onDelete: () => _deleteTodo(todo),
-                      );
-                    },
+                    suffixIcon: _searchQuery.isNotEmpty
+                        ? IconButton(
+                            icon: Icon(
+                              Icons.clear,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? const Color(0xFFFFFFFF)
+                                  : null,
+                            ),
+                            onPressed: () => _onSearchChanged(''),
+                          )
+                        : null,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          Theme.of(context).brightness == Brightness.dark
+                          ? const BorderSide(
+                              color: Color(0xFF5457CC),
+                              width: 1.5,
+                            )
+                          : BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          Theme.of(context).brightness == Brightness.dark
+                          ? const BorderSide(
+                              color: Color(0xFF5457CC),
+                              width: 1.5,
+                            )
+                          : BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide:
+                          Theme.of(context).brightness == Brightness.dark
+                          ? const BorderSide(
+                              color: Color(0xFF5457CC),
+                              width: 2.0,
+                            )
+                          : BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Theme.of(context).brightness == Brightness.dark
+                        ? const Color(0xFF1C1C2E)
+                        : Colors.grey[100],
                   ),
+                ),
+              ),
+
+              // Todo list
+              Expanded(
+                child: _isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : _filteredTodos.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              _searchQuery.isEmpty
+                                  ? Icons.check_circle_outline
+                                  : Icons.search_off,
+                              size: 80,
+                              color: Colors.grey[400],
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              _searchQuery.isEmpty
+                                  ? 'No todos yet!\nTap + to add one'
+                                  : 'No todos found',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: _filteredTodos.length,
+                        padding: const EdgeInsets.only(bottom: 80),
+                        itemBuilder: (context, index) {
+                          final todo = _filteredTodos[index];
+                          return TodoItemWidget(
+                            todo: todo,
+                            onToggle: () => _toggleTodo(todo),
+                            onEdit: () => _editTodo(todo),
+                            onDelete: () => _deleteTodo(todo),
+                          );
+                        },
+                      ),
+              ),
+            ],
+          ),
+          // Tutorial Overlay
+          Consumer<TutorialService>(
+            builder: (context, tutorialService, child) {
+              if (tutorialService.isInitialized &&
+                  !tutorialService.hasSeenDeleteTutorial &&
+                  _todos.isNotEmpty) {
+                return DeleteTaskTutorialOverlay(
+                  onDismiss: () => tutorialService.markDeleteTutorialAsSeen(),
+                );
+              }
+              return const SizedBox.shrink();
+            },
           ),
         ],
       ),
